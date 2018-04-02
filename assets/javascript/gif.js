@@ -35,7 +35,7 @@ $(document).on("click", ".topicsButton", function () {
             $("#gifs-div").empty();
             for (i = 0; i < data.length; i++) {
                 var gifImage = $("<img>").attr("src", data[i].images.fixed_height_still.url);
-                gifImage.attr("data-animate", data[i].images.fixed_height_small.url);
+                gifImage.attr("data-animate", data[i].images.fixed_height_downsampled.url);
                 gifImage.attr("data-still", data[i].images.fixed_height_still.url);
                 gifImage.attr("data-state", "still");
                 var gifRating = $("<p>").text(data[i].rating);
@@ -50,13 +50,13 @@ $(document).on("click", ".topicsButton", function () {
 
 
 // // 4. When the user clicks one of the still GIPHY images, the gif should animate. If the user clicks the gif again, it should stop playing.
-$(".topicsBtn").on("click", function () {
+$("#gifs-div").on("click", "img", function () {
     var state = $(this).attr("data-state");
     if (state === "still") {
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
     } else {
-        $(this).attr("src", $(this).attr("data still"));
+        $(this).attr("src", $(this).attr("data-still"));
         $(this).attr("data-state", "still");
     };
 });
