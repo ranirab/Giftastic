@@ -1,0 +1,12 @@
+.buttons{
+    min-width: 80px;
+    min-height: 300px;
+    background: rgb(160, 160, 212);
+}
+
+#gifs-div{
+    min-width: 80px;
+    min-height: 300px;
+    background: rgb(160, 160, 212);
+
+}
