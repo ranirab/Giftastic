@@ -44,11 +44,8 @@ $(document).on("click", ".topicsButton", function () {
                 imageDiv.append(gifRating);
                 console.log(data[i].images.fixed_height_still.url);
                 $("#gifs-div").append(imageDiv);
-
-
             }
         });
-
 });
 
 
@@ -64,7 +61,6 @@ $("#gifs-div").on("click", "img", function () {
         $(this).attr("data-state", "still");
     };
 });
-
 
 $("#select-gif").on("click", function (event) {
     event.preventDefault();
