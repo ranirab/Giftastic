@@ -10,7 +10,7 @@ function createButtons() {
     for (i = 0; i < topicsArray.length; i++) {
         var topicsBtn = $("<button>");
         topicsBtn.addClass("topicsButton");
-        
+
         topicsBtn.text(topicsArray[i]);
         $(".buttons").append(topicsBtn);
     }
@@ -26,22 +26,26 @@ $(document).on("click", ".topicsButton", function () {
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + inputGif + apiKey;
 
     $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
+            url: queryURL,
+            method: "GET"
+        })
         .then(function (response) {
-            
+
             var data = response.data;
             $("#gifs-div").empty();
             for (i = 0; i < data.length; i++) {
+                var imageDiv = $("<div>");
                 var gifImage = $("<img>").attr("src", data[i].images.fixed_height_still.url);
                 gifImage.attr("data-animate", data[i].images.fixed_height_downsampled.url);
                 gifImage.attr("data-still", data[i].images.fixed_height_still.url);
                 gifImage.attr("data-state", "still");
-                var gifRating = $("<p>").text(data[i].rating);
+                imageDiv.append(gifImage);
+                var gifRating = $("<p>").html("Rating is: " + data[i].rating);
+                imageDiv.append(gifRating);
                 console.log(data[i].images.fixed_height_still.url);
-                $("#gifs-div").append(gifImage);
-                gifImage.append(gifRating);
+                $("#gifs-div").append(imageDiv);
+
+
             }
         });
 
@@ -64,7 +68,7 @@ $("#gifs-div").on("click", "img", function () {
 
 $("#select-gif").on("click", function (event) {
     event.preventDefault();
-console.log("clicked");
+    console.log("clicked");
     var inputGif = $("#gif-input").val().trim();
     topicsArray.push(inputGif);
     createButtons();
@@ -73,55 +77,3 @@ console.log("clicked");
 
 // // * This data is provided by the GIPHY API.
 // // * Only once you get images isplaying with button presses should you move on to the next step.
-
-
-// $("button").on("click", function () {
-//     var animal = $(this).attr("data-animate");
-
-//     var apiKey = "&api_key=0f5kuZG5eoid7B1aXqNUPOs4epVY7q0E&limit=10&offset=0&rating=G&lang=en";
-//     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-//         animal + apiKey;
-
-//     $.ajax({
-//             url: queryURL,
-//             method: "GET"
-//         })
-
-//         .then(function (response) {
-//             console.log(queryURL);
-
-//             console.log(response);
-//             // storing the data from the AJAX request in the results variable
-//             var results = response.data;
-
-//             // Looping through each result item
-//             for (var i = 0; i < results.length; i++) {
-
-//                 // Creating and storing a div tag
-//                 var animalDiv = $("<div>");
-
-//                 // Creating a paragraph tag with the result item's rating
-//                 var p = $("<p>").text("Rating: " + results[i].rating);
-
-//                 // Creating and storing an image tag
-//                 var animalImage = $("<img>");
-//                 // Setting the src attribute of the image to a property pulled off the result item
-//                 animalImage.attr("src", results[i].images.fixed_height_still.url);
-
-//                 // Appending the paragraph and image tag to the animalDiv
-//                 animalDiv.append(animalImage);
-//                 animalDiv.append(p);
-
-//                 // Append the animalDiv to the HTML page in the "#gifs-appear-here" div
-//                 $("#gifs-appear-here").append(animalDiv);
-//             }
-//         });
-// });
-
-// 6. Add a form to your page takes the value from a user input box and adds it into your `topics` array. Then make a function call that takes each topic in the array remakes the buttons on the page.
-
-// // 7. Deploy your assignment to Github Pages.
-
-// // 8. **Rejoice**! You just made something really cool.
-
-// // function searchGifTopics(gif) {
